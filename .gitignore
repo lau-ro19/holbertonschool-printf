@@ -1,0 +1,13 @@
+# Exécutables
+printf
+a.out
+
+# Fichiers objets et temporaires
+*.o
+*~
+\#*\#
+.DS_Store
+
+# Fichiers de test personnels
+main_test.c
+_main.c
