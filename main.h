@@ -7,8 +7,8 @@
 
 /**
  * struct op - Struct for printf operators
- * @op: The specifier (e.g., 'c', 's')
- * @f: The function pointer to the printing function
+ * @op: The specifier
+ * @f: The function associated
  */
 typedef struct op
 {
@@ -17,12 +17,13 @@ typedef struct op
 } op_t;
 
 int _printf(const char *format, ...);
-int (*get_print_func(char s))(va_list);
 int _putchar(char c);
+
 
 int print_char(va_list args);
 int print_str(va_list args);
-int print_percent(va_list args);
+int print_pct(va_list args);
+
 
 int print_int(va_list args);
 int print_number(long n);

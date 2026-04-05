@@ -1,22 +1,22 @@
 #include "main.h"
 
 /**
- * print_int - prints an integer
- * @args: va_list containing the int
- * Return: number of chars printed
+ * print_int - prints an integer (%d and %i)
+ * @args: va_list containing the integer to print
+ * Return: number of characters printed
  */
 int print_int(va_list args)
 {
 	int n = va_arg(args, int);
-	long res = n;
+	long num = n;
 
-	return (print_number(res));
+	return (print_number(num));
 }
 
 /**
- * print_number - recursive helper to print digits
- * @n: the number to print (long to handle INT_MIN)
- * Return: count of digits printed
+ * print_number - helper function that prints a number recursively
+ * @n: the number to print
+ * Return: number of characters printed
  */
 int print_number(long n)
 {
