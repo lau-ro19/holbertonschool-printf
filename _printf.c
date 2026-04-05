@@ -1,23 +1,6 @@
 #include "main.h"
 
 /**
- * get_subprinter - Correspondance table for specifiers
- * @s: The character to match
- * Return: pointer to the printing function
- */
-int (*get_subprinter(char s))(va_list)
-{
-	static int (*table[128])(va_list) = {NULL};
-
-	table['c'] = print_character;
-	table['s'] = print_string;
-	table['d'] = print_decimal;
-	table['i'] = print_decimal;
-
-	return (table[(int)s]);
-}
-
-/**
  * _printf - custom printf function
  * @format: format string
  * Return: number of characters printed
@@ -40,6 +23,7 @@ int _printf(const char *format, ...)
 				spr = write(1, "%", 1);
 			else
 			{
+				/* Ici, on appelle la fonction définie dans get_subprinter.c */
 				f = get_subprinter(format[i + 1]);
 				if (f)
 					spr = f(args);
