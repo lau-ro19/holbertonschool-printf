@@ -1,15 +1,11 @@
 #include "main.h"
+#include <stdarg.h>
+#include <unistd.h>
 
-/**
- * print_character - Prints a char
- * @args: va_list
- * Return: number of characters printed
- */
 int print_character(va_list args)
 {
-	char c = (char)va_arg(args, int);
+	char c;
 
-	if (write(1, &c, 1) < 0)
-		return (-1);
-	return (1);
+	c = (char)va_arg(args, int);
+	return ((write(1, &c, 1) < 0) ? -1 : 1);
 }
