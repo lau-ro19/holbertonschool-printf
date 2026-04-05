@@ -1,8 +1,8 @@
 #include "main.h"
 
 /**
- * print_char - prints a char
- * @args: va_list containing the char
+ * print_char - prints a character
+ * @args: va_list
  * Return: 1
  */
 int print_char(va_list args)
@@ -13,8 +13,8 @@ int print_char(va_list args)
 
 /**
  * print_str - prints a string
- * @args: va_list containing the string
- * Return: number of chars printed
+ * @args: va_list
+ * Return: number of characters printed
  */
 int print_str(va_list args)
 {
@@ -33,11 +33,11 @@ int print_str(va_list args)
 }
 
 /**
- * print_percent - prints a %
- * @args: ignored
+ * print_pct - prints a percent sign
+ * @args: va_list (unused)
  * Return: 1
  */
-int print_percent(va_list args)
+int print_pct(va_list args)
 {
 	(void)args;
 	_putchar('%');
