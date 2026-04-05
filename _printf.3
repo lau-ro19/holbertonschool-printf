@@ -1,11 +1,72 @@
-.TH _PRINTF 3 "APRIL 2026" "Custom Printf Implementation"
+.TH _PRINTF 3 "2026-04-05" "Custom Printf" "Custom Printf Library"
 .SH NAME
-_printf \- prints formatted output to stdout
+_printf \- formatted output conversion
 .SH SYNOPSIS
-#include "main.h"
-int _printf(const char *format, ...);
+.B #include "main.h"
+.sp
+.BI "int _printf(const char *" format ", ...);"
 .SH DESCRIPTION
-The _printf() function produces output according to a format.
-It handles %c, %s, %%, %d, and %i.
+The
+.B _printf()
+function produces output according to a
+.I format
+as described below. It writes the output to
+.BR stdout ,
+the standard output stream.
+.sp
+The function returns the number of characters printed (excluding the null byte used to end output to strings). If an output error is encountered, a value of -1 is returned.
+.SH FORMAT STRING
+The format string is a character string, beginning and ending in its initial shift state, if any. The format string is composed of zero or more directives: ordinary characters (not
+.BR % ),
+which are copied unchanged to the output stream; and conversion specifications, each of which results in fetching zero or more subsequent arguments.
+.sp
+Each conversion specification is introduced by the character
+.BR % ,
+and ends with a
+.BR conversion specifier .
+.SH CONVERSION SPECIFIERS
+.TP
+.B c
+The
+.I int
+argument is converted to an
+.I unsigned char ,
+and the resulting character is written.
+.TP
+.B s
+The
+.I const char *
+argument is expected to be a pointer to an array of character type (pointer to a string). Characters from the array are written up to (but not including) a terminating null byte.
+.TP
+.B d, i
+The
+.I int
+argument is converted to signed decimal notation.
+.TP
+.B %
+A
+.B %
+is written. No argument is converted. The complete conversion specification is
+.BR %% .
+.TP
+.B b
+The unsigned int argument is converted to binary notation.
+.TP
+.B u, o, x, X
+The unsigned int argument is converted to unsigned decimal
+.RB ( u ),
+unsigned octal
+.RB ( o ),
+or unsigned hexadecimal
+.RB ( x " and " X )
+notation.
 .SH RETURN VALUE
-Returns the number of characters printed.
+Upon success,
+.B _printf()
+returns the number of characters printed (excluding the null byte used to end output to strings). If an output error is encountered, the function returns -1.
+.SH AUTHORS
+This custom _printf function was developed as part of the Holberton School curriculum.
+.SH SEE ALSO
+.BR printf (3),
+.BR putchar (3),
+.BR write (2)
