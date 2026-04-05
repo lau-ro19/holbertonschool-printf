@@ -1,22 +1,9 @@
 #include "main.h"
 
 /**
- * print_int - prints an integer (%d and %i)
- * @args: va_list containing the integer to print
- * Return: number of characters printed
- */
-int print_int(va_list args)
-{
-	int n = va_arg(args, int);
-	long num = n;
-
-	return (print_number(num));
-}
-
-/**
- * print_number - helper function that prints a number recursively
- * @n: the number to print
- * Return: number of characters printed
+ * print_number - recursive helper
+ * @n: number
+ * Return: count
  */
 int print_number(long n)
 {
@@ -24,13 +11,27 @@ int print_number(long n)
 
 	if (n < 0)
 	{
-		count += _putchar('-');
+		if (_putchar('-') < 0)
+			return (-1);
+		count++;
 		n = -n;
 	}
-
 	if (n / 10)
+	{
 		count += print_number(n / 10);
-
-	count += _putchar((n % 10) + '0');
+	}
+	if (_putchar((n % 10) + '0') < 0)
+		return (-1);
+	count++;
 	return (count);
+}
+
+/**
+ * print_decimal - prints int
+ * @args: va_list
+ * Return: count
+ */
+int print_decimal(va_list args)
+{
+	return (print_number(va_arg(args, int)));
 }

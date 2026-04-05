@@ -1,19 +1,15 @@
 #include "main.h"
 
 /**
- * _printf - produces output according to a format
- * @format: character string
- * Return: number of characters printed
+ * _printf - formatted output conversion
+ * @format: string containing directives
+ * Return: total number of characters printed
  */
 int _printf(const char *format, ...)
 {
 	va_list args;
-	int i = 0, j, count = 0;
-	op_t ops[] = {
-		{"c", print_char}, {"s", print_str},
-		{"%", print_pct}, {"d", print_int},
-		{"i", print_int}, {NULL, NULL}
-	};
+	int i = 0, total = 0, printed = 0;
+	int (*f)(va_list);
 
 	if (!format || (format[0] == '%' && !format[1]))
 		return (-1);
@@ -23,26 +19,34 @@ int _printf(const char *format, ...)
 	{
 		if (format[i] == '%')
 		{
-			j = 0;
-			while (ops[j].op)
+			if (format[i + 1] == '%')
 			{
-				if (format[i + 1] == ops[j].op[0])
-				{
-					count += ops[j].f(args);
-					i++;
-					break;
-				}
-				j++;
+				printed = _putchar('%');
 			}
-			if (!ops[j].op && format[i + 1])
-				count += _putchar(format[i]);
-			else if (!ops[j].op && !format[i + 1])
-				return (-1);
+			else
+			{
+				f = get_subprinter(format[i + 1]);
+				if (f)
+					printed = f(args);
+				else if (format[i + 1] != '\0')
+				{
+					printed = _putchar('%');
+					printed += _putchar(format[i + 1]);
+				}
+				else
+					return (-1);
+			}
+			i += 2;
 		}
 		else
-			count += _putchar(format[i]);
-		i++;
+		{
+			printed = _putchar(format[i]);
+			i++;
+		}
+		if (printed < 0)
+			return (-1);
+		total += printed;
 	}
 	va_end(args);
-	return (count);
+	return (total);
 }

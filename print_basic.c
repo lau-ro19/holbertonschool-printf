@@ -1,45 +1,33 @@
 #include "main.h"
 
 /**
- * print_char - prints a character
+ * print_character - prints char
  * @args: va_list
  * Return: 1
  */
-int print_char(va_list args)
+int print_character(va_list args)
 {
-	_putchar(va_arg(args, int));
-	return (1);
+	return (_putchar(va_arg(args, int)));
 }
 
 /**
- * print_str - prints a string
+ * print_string - prints string
  * @args: va_list
- * Return: number of characters printed
+ * Return: number of chars
  */
-int print_str(va_list args)
+int print_string(va_list args)
 {
 	char *str = va_arg(args, char *);
-	int i = 0;
+	int count = 0;
 
 	if (!str)
 		str = "(null)";
 
-	while (str[i])
+	while (str[count])
 	{
-		_putchar(str[i]);
-		i++;
+		if (_putchar(str[count]) < 0)
+			return (-1);
+		count++;
 	}
-	return (i);
-}
-
-/**
- * print_pct - prints a percent sign
- * @args: va_list (unused)
- * Return: 1
- */
-int print_pct(va_list args)
-{
-	(void)args;
-	_putchar('%');
-	return (1);
+	return (count);
 }
