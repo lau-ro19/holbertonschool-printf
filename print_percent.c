@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * print_pourcent - print a percent sign or the current format character
+ * print_percent - print a percent sign or the current format character
  * @i: index into the global format string
  *
  * This function checks the global `format` string at position `i` and
@@ -11,7 +11,7 @@
  *
  * Return: 0 on success (function updates globals), non-zero on error.
  */
-int print_pourcent(int i)
+int print_percent(int i)
 {
 	if (format[i] == '%')
 	{
