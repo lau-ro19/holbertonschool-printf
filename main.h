@@ -5,7 +5,7 @@
 #include <unistd.h>
 #include <stddef.h> 
 
-
+int _putchar(char c);
 int _printf(const char *format, ...);
 int write_text_block(const char *format, int *index);
 int print_char(va_list args);
