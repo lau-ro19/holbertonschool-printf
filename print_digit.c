@@ -11,7 +11,9 @@ int print_digit(va_list args)
 	int count = 0;
 	long int num;
 	long int div;
+	int n;
 
+	n = va_arg(args, int);
 	num = n;
 
 
