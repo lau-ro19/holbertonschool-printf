@@ -1,28 +1,14 @@
 #include "main.h"
 
 /**
- * print_percent - print a percent sign or the current format character
- * @i: index into the global format string
+ * print_percent - prints a percent sign
+ * @args: list of arguments (unused)
  *
- * This function checks the global `format` string at position `i` and
- * prints a literal percent sign if the character is '%%', otherwise it
- * prints the character found at format[i]. It increments the global
- * `count` variable to reflect the number of characters printed.
- *
- * Return: 0 on success (function updates globals), non-zero on error.
+ * Return: number of characters printed (always 1)
  */
-int print_percent(int i)
+int print_percent(va_list args)
 {
-	if (format[i] == '%')
-	{
-		_putchar('%');
-		count++;
-	}
-	else
-	{
-		_putchar(format[i]);
-		count++;
-	}
+	(void)args;
 
-	return (0);
+	return (_putchar('%'));
 }
