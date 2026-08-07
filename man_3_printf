@@ -1,0 +1,108 @@
+.TH _PRINTF 3 "August 2026" "1.0" "C Library Functions Manual"
+.SH NAME
+_printf \- custom formatted output conversion function
+.SH SYNOPSIS
+.B #include "main.h"
+.PP
+.BI "int _printf(const char *" format ", ...);"
+.SH DESCRIPTION
+The
+.B _printf()
+function writes output to the standard output stream according to a format string. It mimics the core behavior of the standard C library
+.BR printf (3)
+function.
+
+The format string is a null-terminated character string composed of zero or more directives: ordinary characters (not
+.B %
+), which are copied unchanged to the output stream, and conversion specifiers, each of which results in fetching zero or more subsequent variadic arguments.
+
+.SH CONVERSION SPECIFIERS
+A conversion specifier is introduced by the character
+.B %
+and terminates with a specifier character. This implementation supports the following conversion specifiers:
+
+.TP
+.B %c
+The
+.I int
+argument is converted to an
+.I unsigned char
+and printed as a single character.
+
+.TP
+.B %s
+The
+.I "char *"
+argument is expected to be a pointer to a null-terminated string. Characters are printed up to (but not including) the terminating null byte. If the pointer passed is
+.B NULL
+, the function safely outputs
+.B (null)
+.
+
+.TP
+.B %%
+A literal percent sign '%' is written to standard output. No argument is converted.
+
+.TP
+.B %d, %i
+The
+.I int
+argument is converted to signed decimal notation and printed.
+
+.SH RETURN VALUE
+Upon successful completion,
+.B _printf()
+returns the total number of characters printed (excluding the null byte used to terminate strings).
+
+If an error is encountered (e.g., if the
+.I format
+string pointer itself is
+.B NULL
+or if the format string ends with an incomplete trailing
+.B %
+), the function returns
+.B \-1
+.
+
+.SH EXAMPLES
+To print a formatted string with a string specifier, an integer, and a literal percent sign:
+.PP
+.RS
+.nf
+#include "main.h"
+
+int main(void)
+{
+    int len;
+
+    len = _printf("Hello %s, score: %d%%\en", "Alice", 100);
+    _printf("Printed %d characters.\en", len);
+
+    return (0);
+}
+.fi
+.RE
+
+.SH BUGS AND LIMITATIONS
+.IP \(bu 3
+.B Unknown Specifiers:
+Pairing
+.B %
+with an unsupported specifier (e.g.,
+.B %z
+) outputs both the percent sign and the character literally.
+.IP \(bu 3
+.B Trailing Percent:
+A format string ending with a single
+.B %
+character without a specifier causes the function to return
+.B \-1
+.
+
+.SH AUTHORS
+Written by Holberton School Students.
+
+.SH SEE ALSO
+.BR printf (3),
+.BR write (2),
+.BR stdarg (3)
